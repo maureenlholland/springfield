@@ -4,6 +4,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+// IE11 support
+import searchParams from '../../../base/search-params';
+
 import {
     hasConsentCookie,
     getConsentCookie,
@@ -215,11 +218,7 @@ DownloadAsDefault.onlyEssential = () => {
  * @returns {Boolean}
  */
 DownloadAsDefault.meetsRequirements = () => {
-    if (
-        typeof window.URL !== 'function' ||
-        typeof window.URLSearchParams !== 'function' ||
-        !window.history.replaceState
-    ) {
+    if (!window.history.replaceState) {
         return false;
     } else if (window.site.platform !== 'windows') {
         // Ensure the visitor is on Windows OS
